@@ -67,23 +67,21 @@ void Draw_rhopi(){
   TH1F *hsideband1  =new TH1F("hsideband1",  "sideband1", 100, 0, 3.0);
 
 // ---------- data -----------------------------  
-
+cout<<""**********data************"<<endl
    if(1){
 
-   TFile * file = new TFile("/scratchfs/bes/zengsh/7.0.3/Rhopi/run_t/result1/rootfile/rhopi_t.root");
+   TFile * file = new TFile("your root file with truth data");
    TTree * t_data = (TTree *)file->Get("vxyzmix");
 
   Double_t mrhp;
   Double_t mrhm;
   Double_t mrh0;
   Double_t mpi0;
- // Double_t chi1;
 
   t_data->SetBranchAddress("mrhp",    &mrhp);
   t_data->SetBranchAddress("mrhm",    &mrhm);
   t_data->SetBranchAddress("mpi0",    &mpi0);
   t_data->SetBranchAddress("mrh0",    &mrh0);
-//  t_data->SetBranchAddress("chi1",    &chi1);
   
 int ncount=0, N4C1 =0, N4C3=0, Ndec =0;
    int Nsideband =0;
@@ -93,12 +91,11 @@ int ncount=0, N4C1 =0, N4C3=0, Ndec =0;
      t_data->GetEntry(i);
 
           {
- //    if( chi1>100 ) continue;
-     hmrhp->Fill(mrhp);
  if(fabs(mrh0 - 0.135) <= 0.015 )
-   hsideband1->Fill(mrh0);
+  hsideband1->Fill(mrh0);
  if(fabs(mrh0-0.135)<=0.070&&fabs(mrh0 - 0.135) >= 0.055 )
   hsideband1->Fill(mrh0, 1.0);
+  hmrhp->Fill(mrhp);
   hmrh0->Fill(mrh0);
   hmrhm->Fill(mrhm);
   hmpi0->Fill(mpi0);
@@ -111,20 +108,19 @@ cout<<"  ------ MC -------         "<<endl;
 
    if(2){
 
-   TFile * file = new TFile("/scratchfs/bes/zengsh/7.0.3/Rhopi/run0/result1/rootfile/rhopi_rhopi_00.root");
+   TFile * file = new TFile("your root file with monte carlo");
    TTree * t_mc = (TTree *)file->Get("vxyzmix");
 
   Double_t mrhp;
   Double_t mrhm;
   Double_t mrh0;
   Double_t mpi0;
-//  Double_t chi1;
 
   t_mc->SetBranchAddress("mrhp",      &mrhp);
   t_mc->SetBranchAddress("mrhm",      &mrhm);
   t_mc->SetBranchAddress("mpi0",      &mpi0);
   t_mc->SetBranchAddress("mrh0",      &mrh0);
-//  t_mc->SetBranchAddress("chi1",      &chi1);
+
   
    int ncount=0, N4C1_mc =0, N4C3_mc=0, Ndec_mc =0;
    int Nmc1=0, Nmc2=0, Nmc3=0;
@@ -132,14 +128,13 @@ cout<<"  ------ MC -------         "<<endl;
    for(int i=0; i<t_mc->GetEntries(); i++)
     {
      t_mc->GetEntry(i);
-          {
-//if( chi1>100 ) continue;    
-   hmrhp_mc->Fill(mrhp);
-/*if(fabs(ppip - 0.548) <= 0.025 )*/  hmrhm_mc->Fill(mrhm);
+          {    
+hmrhp_mc->Fill(mrhp);
+hmrhm_mc->Fill(mrhm);
 hmrh0_mc->Fill(mrh0);
 hmpi0_mc->Fill(mpi0);         
- }  // b end    
-     }    // a end
+ }   
+     }
 
  }
 //---------------------------------------------------------------------------
@@ -159,7 +154,7 @@ hmpi0_mc->Fill(mpi0);
 //   hmrhp0_mc->Scale(hmrhp0->GetEntries()/hmrhp0_mc->GetEntries());
    hmrhm_mc->Scale(hmrhm->GetMaximum()/hmrhm_mc->GetMaximum());
    hmrhm_mc->SetLineColor(4);
-   hmrhm_mc->Draw("same");//histogram
+   hmrhm_mc->Draw("same");
 
 
 
@@ -188,7 +183,7 @@ hmpi0_mc->Fill(mpi0);
    leg = new TLegend(0.7,0.7,0.9,0.9);
    leg->AddEntry(hmrhp,    "Data",        "PL");
    leg->AddEntry(hmrhp_mc,  "MC",    "l"); 
-   leg->SetFillColor(10);//white
+   leg->SetFillColor(10);
    leg->Draw();
 
 
@@ -208,7 +203,7 @@ hmpi0_mc->Fill(mpi0);
    leg->AddEntry(hmrh0,    "Data",        "PL");
    leg->AddEntry(hmrh0_mc,  "MC",    "l");
    leg->AddEntry(hsideband1,  "sideband",    "l");
-   leg->SetFillColor(10);//white
+   leg->SetFillColor(10);
    leg->Draw();
    hsideband1->SetLineColor(3);
    hsideband1->Draw("same");
@@ -243,7 +238,7 @@ hmpi0_mc->Fill(mpi0);
    arrow6->SetLineWidth(1);
    arrow6->Draw();
 */
-/*******************fourth**********************/
+
    c1->cd(4) ; gPad->SetLeftMargin(0.2);
    hmpi0->GetYaxis()->SetTitle("Events");
    hmpi0->GetXaxis()->SetTitle("Mass(#pi0) Gev/c^2");
