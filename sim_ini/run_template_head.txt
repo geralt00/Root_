@@ -1,0 +1,38 @@
+//zengshenghui check 2021-09-21
+
+#include "$OFFLINEEVENTLOOPMGRROOT/share/OfflineEventLoopMgr_Option.txt"
+//*************job options for generator (KKMC)***************
+#include "$KKMCROOT/share/jobOptions_KKMC.txt"
+KKMC.CMSEnergy = ECMS;
+KKMC.BeamEnergySpread=BEAMS;
+KKMC.NumberOfEventPrinted=10;
+KKMC.GeneratePsi4260=true;
+
+// Psi(4260)
+KKMC.ResParameterPs7 = {4.6e0, 95e-3, 0.47e-6};
+//KKMC.ModeIndexExpXS=-2;
+KKMC.ParticleDecayThroughEvtGen = true;
+KKMC.ThresholdCut =  4.573;
+KKMC.RadiationCorrection = 1;
+KKMC.TagISR = 1;
+KKMC.TagFSR = 1;
+
+//*************job options for EvtGen***************
+#include "$BESEVTGENROOT/share/BesEvtGen.txt"
+EvtDecay.userDecayTableName = "DEC.dec";
+EvtDecay.statDecays = true;
+
+//**************job options for detector simulation******************
+#include "$BESSIMROOT/share/G4Svc_BesSim.txt"
+
+//configure for calibration constants
+#include "$CALIBSVCROOT/share/calibConfig_sim.txt"
+
+// run ID
+RealizationSvc.RunIdList = {-RUN1,0,-RUN2};//64314-64360
+//RealizationSvc.RunIdList ={-35227,0,-36213};
+#include "$ROOTIOROOT/share/jobOptions_Digi2Root.txt"
+
+BesRndmGenSvc.RndmSeed = RANDOM;
+
+

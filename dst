@@ -1,0 +1,7 @@
+./gensimrec.sh ShapeLcSigmakpi 80 4600 4.59953 0.00156 35227 36213
+./gensimrec.sh ShapeLcSigmakpi 16 4612 4.61186 0.00156 64314 64360
+./gensimrec.sh ShapeLcSigmakpi 80 4626 4.62800 0.00158 63075 63515
+./gensimrec.sh ShapeLcSigmakpi 80 4640 4.64091 0.00158 63516 63715
+./gensimrec.sh ShapeLcSigmakpi 80 4660 4.66124 0.00160 63718 63852
+./gensimrec.sh ShapeLcSigmakpi 240 4680 4.68192 0.00161 63867 65092
+./gensimrec.sh ShapeLcSigmakpi 80 4700 4.69882 0.00162 64028 64313

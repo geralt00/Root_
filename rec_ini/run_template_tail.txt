@@ -1,0 +1,9 @@
+//zengshenghui check 2021-09-21
+
+EventCnvSvc.digiRootInputFile = {"NAMEA.rtraw"};
+
+//ROOT output data file
+EventCnvSvc.digiRootOutputFile ="NAMEB.dst";
+
+//Number of events to be processed (default is 10)
+ApplicationMgr.EvtMax = -1;
